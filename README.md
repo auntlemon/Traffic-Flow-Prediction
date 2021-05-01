@@ -62,13 +62,13 @@ After running the training program, it would generate the following files.
 
 **(1)**  **test on the HZJTD dataset:**
 
-python test_hz.py: This is the command used to test the model.
+* python test_hz.py: This is the command used to test the model.
 
-After running the testing program, it would generate the following files.
+* After running the testing program, it would generate the following files.
 
-data/n5h_hz_dis_adj_label.txt: This file contains the ground truth.
+* data/n5h_hz_dis_adj_label.txt: This file contains the ground truth.
 
-data/n5h_hz_dis_adj_pre.txt: This file contains the prediction results.
+* data/n5h_hz_dis_adj_pre.txt: This file contains the prediction results.
 
 **(2)**  **test on the PEMSD10 dataset:**
 
