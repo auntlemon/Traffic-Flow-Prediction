@@ -43,7 +43,9 @@ PEMSD10 is a subset of an open traffic flow dataset, PEMS, collected by Californ
 
 * python create_dis.py: This is an optional command, which is used to create the weighted topological graph *Gw*.
 * **python train_hz.py**: This is the command used to train the model.
-* After running the training program, it would generate the following files.
+
+After running the training program, it would generate the following files.
+
 * data/test_hz.txt: This file contains the testing samples.
 * checkpoints_distance_adj_n5h: This file contains the trained model.
 
@@ -64,10 +66,9 @@ After running the training program, it would generate the following files.
 
 * python test_hz.py: This is the command used to test the model.
 
-* After running the testing program, it would generate the following files.
+After running the testing program, it would generate the following files.
 
 * data/n5h_hz_dis_adj_label.txt: This file contains the ground truth.
-
 * data/n5h_hz_dis_adj_pre.txt: This file contains the prediction results.
 
 **(2)**  **test on the PEMSD10 dataset:**
