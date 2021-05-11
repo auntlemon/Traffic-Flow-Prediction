@@ -71,11 +71,28 @@ o_fc1_v2 = tf.transpose(o_fc1_v1,perm=[1,0,2])
 o_fc1_v3 = tf.layers.batch_normalization(o_fc1_v2,center=False, scale=True,training=True,fused = True,name='bn1')
 
 
+with tf.name_scope('layer_1_2'):
+    for i in range(length):
+        o_fc1_2 = layer.GraphConvLayer(input_dim=width,
+                                     output_dim=l_sizes[0],
+                                     name='fc1_2',
+                                     act=tf.nn.relu)(adj_norm=ph['similar_adj'], x=tf.reshape((ph['data'])[i],[road_num,width]))
+
+        o_fc_12= tf.reshape(o_fc1_2,(1,-1))
+        li_1.append(o_fc_12)
+
+o_fc1_v1_2 = tf.reshape(li_1,[length,road_num,l_sizes[0]])#这里的output_din=4,故填入width也正确。否则，应该填入l_sizes[0]。
+o_fc1_v2_2 = tf.transpose(o_fc1_v1_2,perm=[1,0,2])
+o_fc1_v3_2 = tf.layers.batch_normalization(o_fc1_v2_2,center=False, scale=True,training=True,fused = True,name='bn2')
+
+
+o_fc1_v4_1 = tf.concat([o_fc1_v3,o_fc1_v3_2],2)#融合后的输出，即lstm层的输入
+
 #
 #lstm层
 lstm_cell_1 = tf.nn.rnn_cell.BasicLSTMCell(num_units=64)
 # init_state = lstm_cell_1.zero_state(batch_size=202, dtype=tf.float32)
-output,state=tf.nn.dynamic_rnn(cell=lstm_cell_1,inputs=o_fc1_v3 ,dtype=tf.float32)
+output,state=tf.nn.dynamic_rnn(cell=lstm_cell_1,inputs=o_fc1_v4_1 ,dtype=tf.float32)
 output_v1 = output[:,-1,:]
 # output_v1 = tf.reshape(output,(road_num,length*64))
 
